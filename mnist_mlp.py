@@ -37,12 +37,39 @@ print(x_test.shape, 'test samples')
 y_train = keras.utils.to_categorical(y_train, num_classes)
 y_test = keras.utils.to_categorical(y_test, num_classes)
 
+# mlp model for training
+# model = Sequential()
+# model.add(Dense(512, activation='relu', input_shape=(784,)))
+# model.add(Dropout(0.2))
+# model.add(Dense(512, activation='relu'))
+# model.add(Dropout(0.2))
+# model.add(Dense(num_classes, activation='softmax'))
+
+# model.summary()
+
+# model.compile(loss='categorical_crossentropy',
+#               optimizer=RMSprop(),
+#               metrics=['accuracy'])
+
+# history = model.fit(x_train, y_train,
+#                     batch_size=batch_size,
+#                     epochs=epochs,
+#                     verbose=1,
+#                     validation_data=(x_test, y_test))
+
+# save model here
+# print('saving model...')
+# model.save('models')
+
+# load model
 print('Loading model...')
 model = keras.models.load_model('models')
+# evaluate model
 score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
 
+# read image and print the answer
 img_width, img_height = 28, 28
 test_image = image.load_img('./images/2_small.png', color_mode='grayscale', target_size=(img_width, img_height))
 test_image = image.img_to_array(test_image)
