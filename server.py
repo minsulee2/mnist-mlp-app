@@ -5,6 +5,8 @@ from io import BytesIO
 from PIL import Image
 from numpy import fromfile, uint8
 
+from image_resizer import resize
+
 app = Flask(__name__, template_folder="./templates/", static_url_path="/images", static_folder="images")
 
 @app.route("/")
@@ -25,6 +27,7 @@ def image_resize():
             print("error : %s" % e)
             return Response("fail", status=400)
 
+        resultImage = resize(img, 28, 28)
         # cv2 image convert to PIL image 
         # and PIL image to bytes 
         im_pil = Image.fromarray(img)
