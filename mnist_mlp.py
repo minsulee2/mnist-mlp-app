@@ -71,12 +71,11 @@ print('Test accuracy:', score[1])
 
 # read image and print the answer
 img_width, img_height = 28, 28
-test_image = image.load_img('./images/2_small.png', color_mode='grayscale', target_size=(img_width, img_height))
+test_image = image.load_img('./images/2.png', color_mode="grayscale", target_size=(img_width, img_height))
 test_image = image.img_to_array(test_image)
-test_image = np.expand_dims(test_image, axis=0)
-test_image = test_image.reshape(1, img_width * img_height)
-test_image = 255 - test_image
 test_image = test_image.astype('float32')
+test_image = 255 - test_image
 test_image /= 255
+test_image = test_image.reshape(1, img_width * img_height)
 result = model.predict(test_image, batch_size=1)
 print(np.argmax(result))
