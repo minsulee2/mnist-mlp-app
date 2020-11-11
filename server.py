@@ -3,7 +3,7 @@ from PIL import Image
 from io import BytesIO
 from numpy import fromfile, uint8
 
-from image_resizer import resize
+from image_preprocessor import preprocess
 from mnist_mlp import load_keras_model, predict_number
 
 model = load_keras_model()
@@ -18,12 +18,12 @@ def healthCheck():
     return "", 200
 
 @app.route("/image", methods = ['GET','POST'])
-def image_resize():
+def get_result():
     if request.method == "POST":
         width, height = 28, 28
         try:
             source = Image.open(request.files['source'])
-            adjusted_image = resize(source, width, height)
+            adjusted_image = preprocess(source, width, height)
             result = predict_number(model, adjusted_image, width, height)
         except Exception as e:
             print("error : %s" % e)

@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-        <title>Image2Vector</title>    
+        <title>Handwritten Number Reader</title>    
 
         <style>
             .img{
@@ -30,8 +30,6 @@
                 <A>This application translates given one digit image to a corresponding number</A>
                 <A>Git Hub repository : </A> <A href="https://github.com/minsulee2/mnist-mlp-app"> mnist-mlp-app</A>
                 <br>
-                <!-- Need to be updated! -->
-                <!-- <A>Testing API : </A> <A href="https://ainize.ai/woomurf/ainize-color-transfer"> on Ainize </A> -->
 
                 <hr class="solid">
                 
@@ -54,8 +52,7 @@
                 
                 <div id ='resultBox' style="margin-left: auto; margin-right: auto;">
                     <p id='errorbox'></p>
-                    <p id='resultImage'></p>
-                    <!-- <img id='resultImage' src="" alt=""> -->
+                    <p id='result'></p>
                 </div>
                 <script>
                     document.getElementById("submit").onclick = () => {
@@ -79,7 +76,7 @@
                                 throw Error("Loading image error");
                             }
                         }).then(text => {
-                            document.getElementById('resultImage').innerText = text;
+                            document.getElementById('result').innerText = text;
                         }).catch(e =>{
                             document.getElementById("errorbox").innerHTML = e;
                         });
