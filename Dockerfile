@@ -1,10 +1,12 @@
 FROM tensorflow/tensorflow:latest-gpu
 
-RUN mkdir /workspace
+RUN apt-get update
+RUN apt-get install -y libgl1-mesa-dev
 
-WORKDIR /workspace
-COPY . /workspace
+RUN pip install keras numpy pillow flask
 
-RUN pip install keras numpy pillow
+COPY . .
 
-CMD python3 mnist_mlp.py
+EXPOSE 80
+ENTRYPOINT ["python"]
+CMD ["server.py"]
