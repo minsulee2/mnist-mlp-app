@@ -1,7 +1,5 @@
-from flask import Flask, render_template, request, send_file, Response
+from flask import Flask, render_template, request, Response
 from PIL import Image
-from io import BytesIO
-from numpy import fromfile, uint8
 
 from image_preprocessor import preprocess
 from mnist_mlp import load_keras_model, predict_number
@@ -17,7 +15,7 @@ def index():
 def healthCheck():
     return "", 200
 
-@app.route("/image", methods = ['GET','POST'])
+@app.route("/image", methods = ['POST'])
 def get_result():
     if request.method == "POST":
         width, height = 28, 28
