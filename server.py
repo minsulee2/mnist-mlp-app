@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, Response
-app = Flask(__name__, template_folder="./templates/")
+app = Flask(__name__, template_folder="./templates/", static_url_path="/images", static_folder="images")
 
 @app.route("/")
 def index():

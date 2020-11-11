@@ -23,6 +23,66 @@
         </style>
     </head>
     <body>
-
+        <div class = "container">
+            <div class="jumbotron mt-3">
+                
+                <h1>Handwritten Number Reader</h1>
+                <A>This application translates given one digit image to a corresponding number</A>
+                <A>Git Hub repository : </A> <A href="https://github.com/minsulee2/mnist-mlp-app"> mnist-mlp-app</A>
+                <br>
+        
+                <hr class="solid">
+                
+                <div id="sampleBox">
+                    <h2>Example</h2>
+                    <figure>
+                        <img class="img" src="./images/2.png" alt="sample_number">
+                        <figcaption>Sample hand written number image</figcaption>
+                    </figure>
+                    
+        
+                </div>
+                <br>
+                <h2>Upload </h2>
+                <div id = 'inputImage'>
+                    <label for="source">Source number image : </label>
+                    <input type = 'file' id = 'source' style="margin-right: 10px; margin-bottom: 10px;">
+                    <button id = "submit" type='submit' class="btn btn-primary btn-lg" style="margin-left: auto;"> Run </button>
+                </div>
+                
+                <div id ='resultBox' style="margin-left: auto; margin-right: auto;">
+                    <p id='errorbox'></p>
+                    <p id='result'></p>
+                </div>
+                <script>
+                    document.getElementById("submit").onclick = () => {
+                        var formData = new FormData();
+                        var source = document.getElementById('source').files[0];
+        
+                        formData.append('source', source);
+        
+                        fetch(
+                            '/image',
+                            {
+                                method: 'POST',
+                                body: formData
+                            }
+                        )
+                        .then(response => {
+                            if (response.status == 200) {
+                                return response.text();
+                            }
+                            else {
+                                throw Error("Loading image error");
+                            }
+                        }).then(text => {
+                            document.getElementById('result').innerText = text;
+                        }).catch(e =>{
+                            document.getElementById("errorbox").innerHTML = e;
+                        });
+                    };
+                </script>
+            </div>
+        </div>
     </body>
 </HTML>
